@@ -9,15 +9,22 @@ import pandas as pd
 from tensorflow.keras.models import load_model
 from sklearn.preprocessing import StandardScaler
 
-EVE_FILE = "/var/log/suricata/eve.json"
-MODEL_PATH = "/home/shreesha369/backdoor_ann_model.h5"
-SCALER_PKL = "/home/shreesha369/scaler.pkl"
-SCALER_MEAN = "/home/shreesha369/scaler_mean.npy"
-SCALER_SCALE = "/home/shreesha369/scaler_scale.npy"
-ENCODERS_PKL = "/home/shreesha369/encoders.pkl"
-TRAIN_CSV = "/home/shreesha369/network_dataset.csv"
+# Add parent directory to path to import config
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import config
 
-LOG_FILE = "/tmp/ann_live.log"
+# -----------------------------------------
+# PATHS (from config.py)
+# -----------------------------------------
+EVE_FILE = config.SURICATA_EVE_LOG
+MODEL_PATH = config.MODEL_PATH
+SCALER_PKL = config.SCALER_PKL
+SCALER_MEAN = config.SCALER_MEAN
+SCALER_SCALE = config.SCALER_SCALE
+ENCODERS_PKL = config.ENCODERS_PKL
+TRAIN_CSV = config.TRAIN_CSV
+
+LOG_FILE = config.ANN_LOG
 
 print("Streaming Suricata logs into Hybrid Engine...")
 

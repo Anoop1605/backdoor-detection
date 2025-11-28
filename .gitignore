@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Environment Variables
+.env
+
+# Logs
+*.log
+/tmp/*.log
+
+# Suricata
+eve.json
+
+# IDEs
+.vscode/
+.idea/
+.DS_Store
+
+# Model Files (Large files should not be committed)
+models/*.h5
+models/*.pkl
+models/*.npy
+models/*.csv
+!models/README.txt

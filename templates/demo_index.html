@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cyber Defense Dashboard - DEMO MODE</title>
+
+<link rel="stylesheet" href="/static/style.css">
+<style>
+.demo-banner {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 15px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+.demo-banner small {
+    display: block;
+    font-size: 14px;
+    font-weight: normal;
+    margin-top: 5px;
+    opacity: 0.9;
+}
+</style>
+
+</head>
+<body>
+
+<div class="demo-banner">
+    🎭 DEMONSTRATION MODE ACTIVE
+    <small>Simulated data - No Suricata or ML models required</small>
+</div>
+
+<div class="header">
+    <h1>Cyber Defense Monitoring Dashboard</h1>
+    <p>Real-time Network + Host Threat Detection</p>
+</div>
+
+<div class="controls">
+    <button id="startBtn" onclick="startSystem()">▶ Start Monitoring</button>
+    <button id="stopBtn" onclick="stopSystem()">⛔ Stop Monitoring</button>
+</div>
+
+<div class="status">
+    <div class="box">
+        <h3>Suricata IDS (Simulated)</h3>
+        <span id="suricata_status" class="light red"></span>
+    </div>
+
+    <div class="box">
+        <h3>ANN Detection Engine (Mock)</h3>
+        <span id="ann_status" class="light red"></span>
+    </div>
+
+    <div class="box">
+        <h3>Hybrid Engine (Mock)</h3>
+        <span id="hybrid_status" class="light red"></span>
+    </div>
+</div>
+
+<h2 class="section-title">Live Threat Logs</h2>
+
+<!-- ANN Logs -->
+<div id="logBox" class="log-box">
+    <h3>🔍 ANN Predictions</h3>
+    Loading ANN logs…
+</div>
+<br>
+
+<!-- Hybrid Logs -->
+<div id="hybridBox" class="log-box">
+    <h3>🛡 Hybrid Engine</h3>
+    Loading Hybrid logs…
+</div>
+<br>
+
+<!-- Suricata Logs -->
+<div id="suricataBox" class="log-box">
+    <h3>📡 Suricata IDS</h3>
+    Loading Suricata logs…
+</div>
+
+<script src="/static/dashboard.js"></script>
+
+</body>
+</html>

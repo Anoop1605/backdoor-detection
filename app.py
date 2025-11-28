@@ -3,15 +3,15 @@ from flask import Flask, render_template, jsonify
 import subprocess
 import threading
 import os
+import config
 
 app = Flask(__name__)
 
 # -----------------------------------------
-# PATHS
+# PATHS (from config.py)
 # -----------------------------------------
-BASE = "/home/shreesha369/cyber_dashboard/backend_scripts"
-STREAM_SCRIPT = f"{BASE}/stream_connection.py"
-HYBRID_SCRIPT = f"{BASE}/hybrid_monitor.py"
+STREAM_SCRIPT = config.STREAM_SCRIPT
+HYBRID_SCRIPT = config.HYBRID_SCRIPT
 
 processes = {
     "suricata": None,
@@ -19,10 +19,10 @@ processes = {
     "hybrid": None
 }
 
-# Log files
-ANN_LOG = "/tmp/ann_live.log"
-HYBRID_LOG = "/tmp/hybrid_live.log"
-SURICATA_LOG = "/tmp/suricata_live.log"
+# Log files (from config.py)
+ANN_LOG = config.ANN_LOG
+HYBRID_LOG = config.HYBRID_LOG
+SURICATA_LOG = config.SURICATA_LOG
 
 
 # -----------------------------------------
@@ -44,7 +44,7 @@ def start_monitor():
         # ---- Start Suricata ----
         if processes["suricata"] is None or processes["suricata"].poll() is not None:
             processes["suricata"] = subprocess.Popen(
-                ["sudo", "suricata", "-i", "eth0", "--af-packet"],
+                ["sudo", "suricata", "-i", config.NETWORK_INTERFACE, "--af-packet"],
                 stdout=subprocess.PIPE,
                 stderr=subprocess.STDOUT,
                 text=True
@@ -58,7 +58,7 @@ def start_monitor():
         # ---- Start ANN Stream Engine ----
         if processes["stream"] is None or processes["stream"].poll() is not None:
             processes["stream"] = subprocess.Popen(
-                ["sudo", "/home/shreesha369/mlenv/bin/python3", STREAM_SCRIPT],
+                ["sudo", config.PYTHON_EXECUTABLE, STREAM_SCRIPT],
                 stdout=subprocess.PIPE,
                 stderr=subprocess.STDOUT,
                 text=True
@@ -72,7 +72,7 @@ def start_monitor():
         # ---- Start Hybrid Engine ----
         if processes["hybrid"] is None or processes["hybrid"].poll() is not None:
             processes["hybrid"] = subprocess.Popen(
-                ["sudo", "/home/shreesha369/mlenv/bin/python3", HYBRID_SCRIPT],
+                ["sudo", config.PYTHON_EXECUTABLE, HYBRID_SCRIPT],
                 stdout=subprocess.PIPE,
                 stderr=subprocess.STDOUT,
                 text=True
