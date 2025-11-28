@@ -1,0 +1,65 @@
+kk<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cyber Defense Dashboard</title>
+
+<link rel="stylesheet" href="/static/style.css">
+
+</head>
+<body>
+
+<div class="header">
+    <h1>Cyber Defense Monitoring Dashboard</h1>
+    <p>Real-time Network + Host Threat Detection</p>
+</div>
+
+<div class="controls">
+    <button id="startBtn" onclick="startSystem()">▶ Start Monitoring</button>
+    <button id="stopBtn" onclick="stopSystem()">⛔ Stop Monitoring</button>
+</div>
+
+<div class="status">
+    <div class="box">
+        <h3>Suricata IDS</h3>
+        <span id="suricata_status" class="light red"></span>
+    </div>
+
+    <div class="box">
+        <h3>ANN Detection Engine</h3>
+        <span id="ann_status" class="light red"></span>
+    </div>
+
+    <div class="box">
+        <h3>Hybrid Engine</h3>
+        <span id="hybrid_status" class="light red"></span>
+    </div>
+</div>
+
+<h2 class="section-title">Live Threat Logs</h2>
+
+<!-- ANN Logs -->
+<div id="logBox" class="log-box">
+    <h3>🔍 ANN Predictions</h3>
+    Loading ANN logs…
+</div>
+<br>
+
+<!-- Hybrid Logs -->
+<div id="hybridBox" class="log-box">
+    <h3>🛡 Hybrid Engine</h3>
+    Loading Hybrid logs…
+</div>
+<br>
+
+<!-- Suricata Logs -->
+<div id="suricataBox" class="log-box">
+    <h3>📡 Suricata IDS</h3>
+    Loading Suricata logs…
+</div>
+
+<script src="/static/dashboard.js"></script>
+
+</body>
+</html>
+
