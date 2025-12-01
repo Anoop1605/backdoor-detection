@@ -132,12 +132,109 @@ sudo python3 app.py
 
 ## 🔧 Troubleshooting
 
+### Common Errors and Solutions
+
+#### ❌ Error: `ModuleNotFoundError: No module named 'tensorflow.python'`
+
+**What it means**: This error appears when running production mode (`app.py`) but TensorFlow is not properly installed.
+
+**Solution**:
+```bash
+# Option 1: Use Demo Mode (No TensorFlow required)
+python3 demo_mode.py
+
+# Option 2: Install TensorFlow for Production Mode
+source .venv/bin/activate
+pip install tensorflow>=2.10.0 pandas scikit-learn joblib numpy
+```
+
+**Note**: If you see this error but TensorFlow IS installed, it's likely because the real issue is the missing Suricata log file (see below).
+
+---
+
+#### ❌ Error: `FileNotFoundError: [Errno 2] No such file or directory: '/var/log/suricata/eve.json'`
+
+**What it means**: The system is trying to read Suricata network logs, but Suricata is not installed or not running.
+
+**Solution**:
+
+**Option 1: Use Demo Mode (Recommended for Testing)**
+```bash
+python3 demo_mode.py
+```
+Demo mode simulates all network traffic and doesn't require Suricata.
+
+**Option 2: Install Suricata (For Production)**
+```bash
+# Install Suricata
+sudo apt update
+sudo apt install suricata
+
+# Start Suricata
+sudo systemctl start suricata
+sudo systemctl enable suricata
+
+# Verify log file exists
+ls -la /var/log/suricata/eve.json
+
+# Then run production mode
+sudo python3 app.py
+```
+
+---
+
+### 🎭 Demo Mode vs 🏭 Production Mode
+
+| Feature | Demo Mode | Production Mode |
+|---------|-----------|-----------------|
+| **Command** | `python3 demo_mode.py` | `sudo python3 app.py` |
+| **Requires Suricata** | ❌ No | ✅ Yes |
+| **Requires ML Models** | ❌ No | ✅ Yes |
+| **Network Traffic** | 🎭 Simulated | 🌐 Real |
+| **Detection** | 🤖 Mock heuristics | 🧠 Real ML models |
+| **Use Case** | Testing, demos, development | Production monitoring |
+| **Setup Time** | ⚡ Instant | 🕐 30+ minutes |
+
+**When to use Demo Mode**:
+- ✅ Testing the dashboard UI
+- ✅ Demonstrating the system
+- ✅ Development and debugging
+- ✅ No Suricata available
+- ✅ Quick evaluation
+
+**When to use Production Mode**:
+- ✅ Real network monitoring
+- ✅ Actual threat detection
+- ✅ Security operations
+- ✅ Suricata is installed and configured
+
+---
+
+### Other Common Issues
+
 -   **Port 7000 in use?**
-    `lsof -ti:7000 | xargs kill -9`
--   **Suricata not found?**
-    Ensure Suricata is installed: `sudo apt install suricata`
--   **Missing models?**
-    Check that all required files are in the `models/` directory.
+    ```bash
+    lsof -ti:7000 | xargs kill -9
+    ```
+
+-   **Permission denied errors?**
+    Production mode requires sudo for network monitoring:
+    ```bash
+    sudo python3 app.py
+    ```
+
+-   **Missing models directory?**
+    Create it and add your trained models:
+    ```bash
+    mkdir -p models/
+    # Add: backdoor_ann_model.h5, scaler.pkl, encoders.pkl, etc.
+    ```
+
+-   **Demo mode not generating traffic?**
+    Ensure `demo_data_generator.py` exists and is executable:
+    ```bash
+    chmod +x demo_data_generator.py
+    ```
 
 ---
 
