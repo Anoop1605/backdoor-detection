@@ -147,6 +147,7 @@ def mock_suricata_logger():
                 
                 with open(DEMO_SURICATA_LOG, "a") as lf:
                     lf.write(log_line)
+                    lf.flush()
                     
             except Exception as e:
                 continue
