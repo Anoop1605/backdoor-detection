@@ -28,7 +28,7 @@ Access the dashboard at **http://localhost:7000**.
 
 ## 🏗️ System Architecture
 
-The system consists of four main detection layers managed by a central Flask dashboard:
+The system consists of three main components managed by a central Flask dashboard:
 
 1.  **Suricata IDS (Network Layer)**
     -   Captures and logs network traffic events to `eve.json`.
@@ -38,19 +38,9 @@ The system consists of four main detection layers managed by a central Flask das
     -   Analyzes network flows using a pre-trained Deep Learning model (TensorFlow/Keras).
     -   Predicts "MALICIOUS" or "BENIGN" based on flow features.
 
-3.  **Host-Based ML Detection (Anomaly Layer)**
-    -   Uses Isolation Forest to detect anomalous process behavior.
-    -   Monitors CPU, memory, threads, and file descriptors.
-    -   Detects suspicious processes and reverse shells.
-
-4.  **Stepping Stone Detector (Network Relay Layer)**
-    -   Correlates inbound and outbound flows to detect relay attacks.
-    -   Identifies potential command-and-control relay patterns.
-
-5.  **Hybrid Fusion Engine (Correlation Layer)**
-    -   Combines all detection layers with weighted scoring.
-    -   Formula: `Final = (ANN * 0.5) + (Host * 0.3) + (Network * 0.2)`
-    -   Provides comprehensive threat assessment.
+3.  **Hybrid Fusion Engine (Correlation Layer)**
+    -   Combines ANN predictions with host-based indicators (suspicious processes, reverse shells).
+    -   Calculates a weighted risk score: `Final = (ANN * 0.6) + (Host * 0.4)`.
 
 ---
 
@@ -109,23 +99,18 @@ sudo python3 app.py
 ## 📂 Project Structure
 
 ```
-├── app.py                      # Main Flask application (Production)
-├── demo_mode.py                # Demo application (Simulated)
-├── demo_data_generator.py      # Traffic simulator for demo
-├── config.py                   # Centralized configuration
-├── backend_scripts/            # Core detection logic
-│   ├── stream_connection.py      # ANN Engine
-│   ├── fusion_engine.py          # Multi-layer fusion engine
-│   ├── stepping_stone.py         # Network relay detector
-│   ├── train_host_model.py       # ML model training
-│   ├── test_integration.py       # Integration tests
-│   ├── SETUP_GUIDE.md            # Detailed setup guide
-│   └── README.md                 # Backend documentation
-├── models/                     # ML model files directory
-├── static/                     # CSS & JS assets
-├── templates/                  # HTML templates
-├── requirements.txt            # Python dependencies
-└── .gitignore                  # Git ignore rules
+├── app.py                  # Main Flask application (Production)
+├── demo_mode.py            # Demo application (Simulated)
+├── demo_data_generator.py  # Traffic simulator for demo
+├── config.py               # Centralized configuration
+├── backend_scripts/        # Core detection logic
+│   ├── stream_connection.py  # ANN Engine
+│   ├── hybrid_monitor.py     # Hybrid Engine
+│   └── fusion_engine.py      # Risk scoring logic
+├── models/                 # ML model files directory
+├── static/                 # CSS & JS assets
+├── templates/              # HTML templates
+└── requirements.txt        # Python dependencies
 ```
 
 ---

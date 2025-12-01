@@ -1,22 +1,9 @@
-# ============================================
-# DEMO MODE - Minimal Requirements
-# ============================================
-# These are required for running demo_mode.py
+# Minimal requirements for DEMO mode
 flask>=2.0.0
 psutil>=5.8.0
 
-# ============================================
-# PRODUCTION MODE - Full System Requirements
-# ============================================
-# Uncomment these for full detection capabilities
-
-# Core ML/Data Science
+# Full system requirements (optional - only needed for production)
 # tensorflow>=2.10.0
 # pandas>=1.3.0
 # scikit-learn>=1.0.0
 # joblib>=1.1.0
-# numpy>=1.21.0
-
-# Note: For backend_scripts training and detection,
-# you need scikit-learn, joblib, and psutil at minimum.
-# See backend_scripts/requirements.txt for backend-specific deps.

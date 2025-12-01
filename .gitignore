@@ -3,86 +3,31 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
-*.pye
 .Python
-*.so
-*.egg
-*.egg-info/
-dist/
-build/
-*.whl
-
-# Virtual Environments
 env/
 venv/
 .venv/
-ENV/
 pip-log.txt
 pip-delete-this-directory.txt
 
 # Environment Variables
 .env
-.env.local
 
-# Logs and Temporary Files
+# Logs
 *.log
-*.tmp
 /tmp/*.log
-/tmp/*.json
-*.swp
-*.swo
-*~
 
-# Suricata Files
+# Suricata
 eve.json
-fast.log
-stats.log
-suricata.log
 
-# IDEs and Editors
+# IDEs
 .vscode/
 .idea/
 .DS_Store
-*.sublime-project
-*.sublime-workspace
-.project
-.pydevproject
-.settings/
 
-# Model Files (Large binary files - should be downloaded separately)
+# Model Files (Large files should not be committed)
 models/*.h5
-models/*.keras
-models/*.pb
-models/*.onnx
+models/*.pkl
+models/*.npy
+models/*.csv
 !models/README.txt
-
-# Trained ML Models (backend_scripts)
-backend_scripts/*.pkl
-backend_scripts/*.npy
-backend_scripts/*.h5
-backend_scripts/*.joblib
-
-# Data Files
-*.csv
-*.json
-!config.json
-!package.json
-
-# OS Files
-Thumbs.db
-.DS_Store
-desktop.ini
-
-# Testing
-.pytest_cache/
-.coverage
-htmlcov/
-.tox/
-
-# Jupyter Notebooks
-.ipynb_checkpoints/
-*.ipynb
-
-# Documentation builds
-docs/_build/
-site/
