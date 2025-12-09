@@ -104,11 +104,14 @@ def mock_hybrid_engine():
                 # Mock host score
                 host_score = random.uniform(0.0, 0.3)
                 
-                # Fusion
-                final_score = (ann_score * 0.6) + (host_score * 0.4)
+                # Mock stepping stone score (rarely high)
+                stepping_stone_score = 0.8 if random.random() < 0.05 else 0.0
+
+                # Fusion (matching production formula)
+                final_score = (ann_score * 0.5) + (host_score * 0.3) + (stepping_stone_score * 0.2)
                 label = "MALICIOUS" if final_score >= 0.5 else "BENIGN"
                 
-                log_line = f"[HYBRID] {label}  Score={final_score:.4f}  (ANN={ann_score:.4f}, Host={host_score:.4f})\n"
+                log_line = f"[HYBRID] {label}  Score={final_score:.4f}  (ANN={ann_score:.4f}, Host={host_score:.4f}, Network={stepping_stone_score:.4f})\n"
                 
                 print(log_line, end="")
                 with open(DEMO_HYBRID_LOG, "a") as lf:
@@ -159,7 +162,7 @@ def mock_suricata_logger():
 def start_monitor():
     try:
         # Clear old logs
-        for log in [DEMO_ANN_LOG, DEMO_HYBRID_LOG, DEMO_SURICATA_LOG]:
+        for log in [DEMO_ANN_LOG, DEMO_HYBRID_LOG, DEMO_SURICATA_LOG, DEMO_EVE_LOG]:
             open(log, "w").close()
         
         # Start data generator

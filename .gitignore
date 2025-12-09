@@ -62,11 +62,21 @@ backend_scripts/*.npy
 backend_scripts/*.h5
 backend_scripts/*.joblib
 
-# Data Files
+# Data Files (exclude large datasets but keep examples)
+data/
 *.csv
+!*example*.csv
 *.json
 !config.json
 !package.json
+!.env.example
+
+# Test Results
+attacks_performed.json
+accuracy_report.json
+manual_attack_log.txt
+test_results.txt
+attack_test_log.txt
 
 # OS Files
 Thumbs.db

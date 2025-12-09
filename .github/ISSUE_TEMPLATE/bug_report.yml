@@ -1,0 +1,117 @@
+name: Bug Report
+description: Report a bug or issue with the Backdoor Detection System
+title: "[BUG] "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug! Please fill out the form below.
+
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component
+      description: Which component is affected?
+      options:
+        - Dashboard/UI
+        - Detection Engine (ANN)
+        - Suricata Integration
+        - Host Monitoring
+        - Hybrid Fusion
+        - Alert System
+        - Training Scripts
+        - Attack Simulator
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: mode
+    attributes:
+      label: Mode
+      description: Which mode were you using?
+      options:
+        - Demo Mode
+        - Production Mode
+        - Both
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: A clear description of the bug
+      placeholder: What happened?
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: How can we reproduce this issue?
+      placeholder: |
+        1. Start the application with '...'
+        2. Click on '...'
+        3. See error
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What did you expect to happen?
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      description: What actually happened?
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Error Logs
+      description: Please paste any relevant error messages or logs
+      render: shell
+      placeholder: |
+        Paste error messages here...
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Please provide your environment details
+      value: |
+        - OS: [e.g., Ubuntu 22.04]
+        - Python Version: [e.g., 3.10.6]
+        - TensorFlow Version: [e.g., 2.13.0]
+        - Suricata Version: [e.g., 6.0.13]
+        - Installation Method: [pip/apt/source]
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Any other information that might be helpful
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: I have searched existing issues to avoid duplicates
+          required: true
+        - label: I have included error logs/screenshots if applicable
+          required: false
+        - label: I have tested this on the latest version
+          required: false

@@ -3,21 +3,31 @@
 function startSystem() {
     fetch("/start")
         .then(res => res.json())
-        .then(() => {
+        .then(data => {
+            if (data.error) {
+                alert("Error starting system: " + data.error);
+                return;
+            }
             setStatus("suricata_status", true);
             setStatus("ann_status", true);
             setStatus("hybrid_status", true);
-        });
+        })
+        .catch(err => alert("Network error: " + err));
 }
 
 function stopSystem() {
     fetch("/stop")
         .then(res => res.json())
-        .then(() => {
+        .then(data => {
+            if (data.error) {
+                alert("Error stopping system: " + data.error);
+                return;
+            }
             setStatus("suricata_status", false);
             setStatus("ann_status", false);
             setStatus("hybrid_status", false);
-        });
+        })
+        .catch(err => alert("Network error: " + err));
 }
 
 /* ===== STATUS LIGHT ===== */
